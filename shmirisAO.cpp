@@ -3,7 +3,7 @@ This is just BMC-interface adapted to the IrisAO as a stop-gap until we get the 
 
 To compile:
 
-g++ -Wall -o shmirisAO shmirisAO.cpp -lirisao.devices.1.0.2.5 -lmilk
+make shmirisAO
 
 */
 
@@ -107,15 +107,15 @@ int controlLoop(const char * mSerial, const char * dSerial, const char * shm_nam
 
     // Validate SMimage dimensionality and size against DM
     if (SMimage[0].md[0].naxis != 2) {
-        printf("SM image naxis = %d\n", SMimage[0].md[0].naxis);
+        printf("SM image naxis = %d, but expected 2.\n", SMimage[0].md[0].naxis, shm_x);
         return -1;
     }
     if (SMimage[0].md[0].size[0] != shm_x) {
-        printf("SM image size (axis 1) = %d\n", SMimage[0].md[0].size[0]);
+        printf("SM image size (axis 1) = %d, but expected %d.\n", SMimage[0].md[0].size[0], shm_x);
         return -1;
     }
     if (SMimage[0].md[0].size[1] != shm_y) {
-        printf("SM image size (axis 2) = %d\n", SMimage[0].md[0].size[1]);
+        printf("SM image size (axis 2) = %d, but expected %d.\n", SMimage[0].md[0].size[1], shm_y);
         return -1;
     }
 
