@@ -96,8 +96,8 @@ int zeroDM(MirrorHandle dm)
 int controlLoop(const char * mSerial, const char * dSerial, const char * shm_name, const char * hardwareDisable) {
 
     // Initialize variables
-    uint32_t shm_x = 3; // Hard-coded for now
-    uint32_t shm_y = 37;
+    uint32_t shm_x = 37; // Hard-coded for now
+    uint32_t shm_y = 3;
     MirrorHandle dm;
     IMAGE* SMimage;
 
@@ -137,8 +137,10 @@ int controlLoop(const char * mSerial, const char * dSerial, const char * shm_nam
     double dt_com = 0;
     int times = 0;
     // control loop
+
+    printf("IrisAO %s: waiting on commands!\n", mSerial);
     while (!stop) {
-        printf("IrisAO %s: waiting on commands.\n", mSerial);
+        //printf("IrisAO %s: waiting on commands.\n", mSerial);
         // Wait on semaphore update
         ImageStreamIO_semwait(&SMimage[0], 3); //hard-coded
         
